@@ -1,4 +1,8 @@
-#include "chess.h"
+#include "standard.h"
+#include <termios.h>
+#include <unistd.h>
+
+struct termios attributes;
 
 //This file includes basic/standard functions (Here raw_input and lower)
 
@@ -38,4 +42,29 @@ int lower(char * string, int len){
 
 cleanup:
     return sum;
+}
+
+int change_echo(bool on){
+    int error_check = 0;
+
+    error_check = tcgetattr(STDIN_FILENO, &attributes);
+    if(-1 == error_check){
+        perror("Failed to retrieve terminal attributes");
+        goto cleanup;
+    }
+
+    if(on){
+        attributes.c_lflag |= (ECHO | ICANON);
+    }
+    else{
+        attributes.c_lflag &= ~(ECHO | ICANON);
+    }
+    error_check = tcsetattr(STDIN_FILENO, TCSANOW, &attributes);
+    if(-1 == error_check){
+        perror("Failed to set terminal attributes");
+        goto cleanup;
+    }
+
+cleanup:
+    return error_check;
 }

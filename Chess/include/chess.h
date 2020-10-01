@@ -1,22 +1,19 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
+#include "standard.h"
+#include "standard_color.h"
 
 #define BOARD_LEN (8)
-#define BUFFER_SIZE (1024)
 
-enum piece_type {EMPTY, PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING};
-enum color {NORMAL = 0, BG_BLACK = 40, BG_RED = 41, BLACK = 90, WHITE = 97, CLEAR = 31}; 
-struct piece{
-    enum piece_type type;
-    enum color color;
-};
+typedef enum piece_type {EMPTY, PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING}piece_type;
+typedef enum game_colors {NORMAL = 0, TILE1_COLOR = BG_BLACK, TILE2_COLOR = BG_RED, PLAYER1_COLOR = B_WHITE, PLAYER2_COLOR = B_BLACK, CLEAR = B_CYAN}game_colors; 
+
+typedef struct piece{
+    piece_type type;
+    game_colors color;
+}piece;
 
 struct piece * board;
 
-int get_raw_input(char * prompt, char ** input);
-int lower(char * string, int len);
+void menu();
 int parse_input(char * input, int * origin_point, int * dest_point);
 int print();
 void flush_board();
