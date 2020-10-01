@@ -178,7 +178,7 @@ void print_credits(){
     }
 }
 
-voi menu(){
+void menu(){
     char input = 0;
     int cursor_pos = 0;
 
