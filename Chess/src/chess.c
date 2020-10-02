@@ -10,14 +10,8 @@ int parse_input(char * input, int * origin_point, int * dest_point){
     int dest_column = -1;
     int dest_row = -1;
     bool dest = false;
-
-    len = strnlen(input, BUFFER_SIZE);
-    if(-1 == len){
-        perror("Strnlen error");
-        goto cleanup;
-    }
     
-    lower(input, len);
+    len = lower(input, 0);
 
     for(i=0; i<len-1; i++){
         if('a' <= input[i] && input[i] <= 'z'){

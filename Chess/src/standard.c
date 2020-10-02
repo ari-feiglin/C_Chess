@@ -22,7 +22,6 @@ int get_raw_input(char * prompt, char ** input){
 
 int lower(char * string, int len){
     int i = 0;
-    int sum = -1;
 
     if(1 != len){
         len = strnlen(string, BUFFER_SIZE);
@@ -32,16 +31,14 @@ int lower(char * string, int len){
         }
     }
 
-    sum = 0;
     for(i=0; i<len; i++){
         if('A' <= string[i] && string[i] <= 'Z'){
             string[i] += 32;
         }
-        sum += string[i];
     }
 
 cleanup:
-    return sum;
+    return len;
 }
 
 int change_echo(bool on){
